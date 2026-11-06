@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy - Tatpulse Leads</title>
+<title>Privacy Policy - TATPulse Leads</title>
 <style>
   :root {
     --fg: #0f172a;
@@ -56,18 +56,19 @@
 <main>
 
 <h1>Privacy Policy</h1>
-<p class="meta"><strong>Tatpulse Leads Android Application</strong> &middot; Last updated: 14 July 2026</p>
-<p class="meta">Enetro's Android app policies: <a href="index.html">Tatpulse Forwarder</a> &middot; <strong>Tatpulse Leads</strong> (this page)</p>
+<p class="meta"><strong>TATPulse Leads for Android and iOS</strong> &middot; Last updated: 6 November 2026</p>
+<p class="meta">Enetro's app policies: <a href="index.html">TATPulse Forwarder</a> &middot; <strong>TATPulse Leads</strong> (this page)</p>
 
 <h2>Who we are</h2>
-<p>Enetro Private Limited ("Enetro", "we", "us") is the developer of the Tatpulse Leads Android application ("the app"). The app is a B2B field-sales tool that delivers time-critical sales-lead alerts from a dealership's Tatpulse workspace to the paired device of a sales representative, and reports the representative's responses (claims, calls, outcomes) back to that workspace.</p>
+<p>Enetro Private Limited ("Enetro", "we", "us") is the developer of the TATPulse Leads application for Android and iOS ("the app"). The app is a B2B field-sales tool that delivers time-critical sales-lead alerts from a dealership's TATPulse workspace to the paired device of a sales representative, reports the representative's responses (claims, calls, outcomes) back to that workspace, and, where the dealership has set up a field form, lets the representative file a lead for a customer they met in person.</p>
 <p>For questions about this policy, contact <a href="mailto:info@enetro.ai">info@enetro.ai</a>.</p>
 
 <h2>Scope of this policy</h2>
-<p>This policy describes the data handling of the <strong>Tatpulse Leads Android application only</strong>. It is separate from, and supplements, the policy for the Tatpulse Forwarder app at <a href="index.html">this site's index page</a> and Enetro's general privacy policy for the corporate website and web platform at <a href="https://www.enetro.ai/privacy-policy">https://www.enetro.ai/privacy-policy</a>.</p>
+<p>This policy describes the data handling of the <strong>TATPulse Leads application, on Android and on iOS</strong>. Where the two differ, the difference is stated. It is separate from, and supplements, the policy for the TATPulse Forwarder app at <a href="index.html">this site's index page</a> and Enetro's general privacy policy for the corporate website and web platform at <a href="https://www.enetro.ai/privacy-policy">https://www.enetro.ai/privacy-policy</a>.</p>
 
 <h2>What the app does</h2>
-<p>A dealership administrator pairs a sales representative's device with the app using a one-time pairing code generated in the dealership's Tatpulse workspace; there is no consumer sign-up. Once paired, the device receives sales-lead alerts in real time (via push notifications and a persistent connection), the representative can claim a lead and call the customer directly from the alert, and the app reports the claim and the call outcome back to the dealership's lead timeline. While the representative is on shift, the app maintains a lightweight presence heartbeat so the dealership's system knows the device is reachable before dispatching a lead to it.</p>
+<p>A dealership administrator pairs a sales representative's device with the app using a one-time pairing code generated in the dealership's TATPulse workspace; there is no consumer sign-up. Once paired, the device receives sales-lead alerts in real time (via push notifications and a persistent connection), the representative can claim a lead and call the customer directly from the alert, and the app reports the claim and the call outcome back to the dealership's lead timeline. While the representative is on shift, the app maintains a lightweight presence heartbeat so the dealership's system knows the device is reachable before dispatching a lead to it (on iOS the heartbeat runs only while the app is open or an alert is being delivered).</p>
+<p>Where the dealership has set up a field form, the app shows a New lead button. The representative fills in the form for a customer they met in person: the customer's details, the form's other answers, and, where the form asks for them, photos, files and the phone's location. The lead is then created in the dealership's workspace, and the representative can follow it in Filed by me.</p>
 
 <h2>Data we collect</h2>
 
@@ -78,30 +79,48 @@
   </thead>
   <tbody>
     <tr><td>Lead responses (claim, decline, call outcome)</td><td>Core function: routing the lead and updating the dealership's lead timeline</td><td>When the representative acts on a lead</td></tr>
-    <tr><td>Call log entry of the representative's call to a claimed lead's customer (time, duration, whether it connected) &mdash; <strong>optional</strong>, only if the Call Log permission is granted</td><td>Show first/last-contacted history on the lead and record the sales call in the dealership's lead timeline</td><td>After the representative calls a customer of a lead they claimed</td></tr>
+    <tr><td>Call log entry of the representative's call to a claimed lead's customer (time, duration, whether it connected): <strong>optional</strong>, only if the Call Log permission is granted. <strong>Android only</strong>; iOS offers no call log access</td><td>Show first/last-contacted history on the lead and record the sales call in the dealership's lead timeline</td><td>After the representative calls a customer of a lead they claimed</td></tr>
     <tr><td>On-shift status and presence heartbeat (last-seen time)</td><td>Dispatch leads only to reachable, on-shift devices</td><td>Periodically while paired and on shift</td></tr>
-    <tr><td>FCM registration token</td><td>Deliver lead alerts and wake-up signals</td><td>At app startup and when the token rotates</td></tr>
+    <tr><td>Push token (Firebase Cloud Messaging; on iOS also the token of each Lock Screen countdown, a Live Activity)</td><td>Deliver lead alerts and wake-up signals</td><td>At app startup and when the token rotates</td></tr>
     <tr><td>Device identifier (pairing UUID)</td><td>Identify the device to its dealership workspace</td><td>At pairing</td></tr>
-    <tr><td>App version, Android OS version, device model</td><td>Diagnostics</td><td>At app startup, periodically, and on crash</td></tr>
+    <tr><td>App version, OS version, device model</td><td>Diagnostics</td><td>At app startup and periodically</td></tr>
+    <tr><td>Notification readiness (whether notifications, alert sounds, Do Not Disturb or Focus, background refresh and power saving allow an alert through)</td><td>Warn the representative and the dealership when an alert would be held back</td><td>With the presence heartbeat</td></tr>
+    <tr><td>The representative's own profile they edit in the app: phone number, WhatsApp numbers, spoken languages, gender, working hours and holidays</td><td>Route leads and live calls to a representative who can take them</td><td>When the representative edits them</td></tr>
     <tr><td>Alert delivery diagnostics (whether an alert was shown, rang, or was blocked)</td><td>Help the dealership diagnose missed leads</td><td>When a lead alert is processed</td></tr>
-    <tr><td>Crash reports (anonymised)</td><td>Diagnose app errors</td><td>When the app crashes</td></tr>
+    <tr><td>Crash reports (anonymised). <strong>Android only</strong>; the iOS app sends no crash reports</td><td>Diagnose app errors</td><td>When the app crashes</td></tr>
+  </tbody>
+</table>
+
+<h3>What the representative files with a field form</h3>
+<p>Only when the dealership has set up a field form, and only what the representative enters or attaches when they tap Create lead:</p>
+<table>
+  <thead>
+    <tr><th>Data</th><th>Purpose</th><th>When collected</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>The customer's name and phone number, and an email address or other phone numbers where the form asks for them, typed by the representative</td><td>Create the customer's lead in the dealership's workspace</td><td>When the representative files the form</td></tr>
+    <tr><td>The form's other answers (text, numbers, choices, dates, a vehicle registration, notes)</td><td>The details the dealership asked its representatives to record</td><td>When the representative files the form</td></tr>
+    <tr><td>Photos the representative takes with the camera or picks from the photo library, resized on the device before they are sent</td><td>Attach what the dealership's form asks for (for example a visiting card)</td><td>When the representative adds a photo and files the form</td></tr>
+    <tr><td>PDF and image files the representative picks</td><td>Attach documents the form asks for (for example a quotation)</td><td>When the representative adds a file and files the form</td></tr>
+    <tr><td>The device's precise location and its accuracy, read once</td><td>Record where the customer was met, on a form that asks for it</td><td>Only when the representative taps Use my location; never in the background, never otherwise</td></tr>
   </tbody>
 </table>
 
 <h3>Not collected</h3>
 <ul>
-  <li>Call recordings &mdash; the app never records calls or call audio</li>
-  <li>Calls unrelated to claimed leads &mdash; the app reads only the log entry of the outgoing call to the claimed lead's customer number; it never uploads or scans the rest of the call history</li>
+  <li>Call recordings: the app never records calls or call audio</li>
+  <li>Calls unrelated to claimed leads: the app reads only the log entry of the outgoing call to the claimed lead's customer number; it never uploads or scans the rest of the call history</li>
   <li>Phone contacts</li>
   <li>SMS messages</li>
-  <li>Location</li>
-  <li>Photos, files, or other on-device content</li>
-  <li>Microphone or camera input</li>
+  <li>Location, other than the single reading a representative asks for with Use my location on a field form</li>
+  <li>The photo library or files beyond the items the representative picks for a form (the system picker hands over only what they pick)</li>
+  <li>Microphone input; the camera is used only while the representative takes a photo for a form</li>
   <li>Browsing history</li>
+  <li>Data used to track you across other companies' apps or websites</li>
 </ul>
 
 <h2>Call log access (optional)</h2>
-<p>The Call Log permission is <strong>optional</strong> and is requested on its own clearly-marked card inside the app. Declining it does not restrict the app: lead alerts, claiming, and dialing all work without it. When granted, the app reads <strong>only</strong> the log entry of the call the representative just placed to the customer of a lead they claimed &mdash; the call's time, duration, and whether it connected &mdash; to (a) show first/last-contacted history on that lead and (b) record the sales call in the dealership's lead timeline. The permission can be withdrawn at any time in Android system settings, and the app continues to work.</p>
+<p>The Call Log permission is <strong>optional</strong> and is requested on its own clearly-marked card inside the app. Declining it does not restrict the app: lead alerts, claiming, and dialing all work without it. When granted, the app reads <strong>only</strong> the log entry of the call the representative just placed to the customer of a lead they claimed: the call's time, duration, and whether it connected: to (a) show first/last-contacted history on that lead and (b) record the sales call in the dealership's lead timeline. The permission can be withdrawn at any time in Android system settings, and the app continues to work.</p>
 
 <h2>How we use the data</h2>
 <ul>
@@ -109,17 +128,18 @@
   <li><strong>Updating the dealership's lead timeline</strong> with claims, calls, and outcomes so the dealership can follow up on its own sales leads.</li>
   <li><strong>Showing contact history</strong> (first/last called) on a lead to the representative handling it.</li>
   <li><strong>Presence and availability</strong>: dispatching leads only to devices that are on shift and reachable.</li>
-  <li><strong>Diagnosing problems</strong> through alert-delivery diagnostics and anonymised crash reports.</li>
+  <li><strong>Creating leads the representative files</strong> with a field form, with the photos, files and location the form asks for.</li>
+  <li><strong>Diagnosing problems</strong> through alert-delivery diagnostics and, on Android, anonymised crash reports.</li>
 </ul>
 <p>We do <strong>not</strong> use this data for advertising, profiling, training machine-learning models, or any purpose unrelated to the dealership workspace the device is paired to. We do not sell personal data.</p>
 
 <h2>Push notifications and crash reporting</h2>
 
-<h3>Google Firebase Cloud Messaging (FCM)</h3>
-<p>The app uses FCM to deliver lead alerts and wake-up signals from our servers (for example when a new lead is dispatched, when the device is asked to re-authenticate, or when a pairing is revoked). FCM processes the device's registration token. Google's handling of FCM data is governed by Google's privacy policy at <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>.</p>
+<h3>Google Firebase Cloud Messaging (FCM) and Apple Push Notification service (APNs)</h3>
+<p>The app uses FCM to deliver lead alerts and wake-up signals from our servers (for example when a new lead is dispatched, when the device is asked to re-authenticate, or when a pairing is revoked); on iOS, FCM hands the alerts to Apple's APNs, which delivers them to the device. Both process the device's push token. Apple's handling is governed by Apple's privacy policy at <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a>. Google's handling of FCM data is governed by Google's privacy policy at <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>.</p>
 
-<h3>Google Firebase Crashlytics</h3>
-<p>The app uses Crashlytics to collect anonymised crash reports if it misbehaves. We do not include customer phone numbers, call log entries, or lead contents in crash reports.</p>
+<h3>Google Firebase Crashlytics (Android only)</h3>
+<p>The Android app uses Crashlytics to collect anonymised crash reports if it misbehaves. We do not include customer phone numbers, call log entries, or lead contents in crash reports.</p>
 
 <h2>Retention</h2>
 <table>
@@ -128,6 +148,8 @@
   </thead>
   <tbody>
     <tr><td>Lead activity and call reports (server-side)</td><td>Retained as part of the dealership's own lead records, under the dealership's control</td></tr>
+    <tr><td>Leads filed with a field form, with their photos and files</td><td>Retained as part of the dealership's own lead records; a lead's photos and files are deleted with the lead</td></tr>
+    <tr><td>Photos and files uploaded for a form that was never filed</td><td>Deleted about a day after upload, by an hourly clean-up</td></tr>
     <tr><td>Alert delivery diagnostics</td><td>90 days</td></tr>
     <tr><td>Crash reports</td><td>90 days (Firebase default)</td></tr>
     <tr><td>Device pairing and metadata</td><td>Until the device is unpaired</td></tr>
@@ -140,17 +162,19 @@
 <ul>
   <li>The <strong>dealership workspace the device is paired to</strong>, including the dealership's own CRM or lead-management destinations its administrator has configured (this is the entire point of the app).</li>
   <li><strong>Google Firebase</strong> for FCM push notifications and Crashlytics crash reporting (see <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>).</li>
-  <li><strong>Cloud infrastructure providers</strong> (Amazon Web Services, hosted in India) that operate our servers.</li>
+  <li><strong>Apple</strong>, on iOS, for push notification delivery through APNs (see <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a>).</li>
+  <li><strong>Cloud infrastructure providers</strong> (Amazon Web Services, hosted in India) that operate our servers and store the photos and files filed with a form.</li>
 </ul>
 <p>We do not sell data to data brokers, share call logs or lead data with advertisers, or disclose data to anyone other than the parties above except where required by law.</p>
 
-<h2>Android permissions</h2>
+<h2>Permissions</h2>
+<h3>Android</h3>
 <table>
   <thead>
     <tr><th>Permission</th><th>Why</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>READ_CALL_LOG</code> <em>(optional)</em></td><td>Show first/last-contacted history and record the connected sales call for leads the representative claimed &mdash; see "Call log access" above</td></tr>
+    <tr><td><code>READ_CALL_LOG</code> <em>(optional)</em></td><td>Show first/last-contacted history and record the connected sales call for leads the representative claimed: see "Call log access" above</td></tr>
     <tr><td><code>READ_PHONE_STATE</code></td><td>Detect an active call so a full-screen lead alert does not interrupt it, and confirm a lead call started</td></tr>
     <tr><td><code>CALL_PHONE</code></td><td>Dial the lead's customer number directly when the representative taps Call</td></tr>
     <tr><td><code>POST_NOTIFICATIONS</code>, <code>POST_PROMOTED_NOTIFICATIONS</code></td><td>Show lead alerts and service status</td></tr>
@@ -159,26 +183,42 @@
     <tr><td><code>VIBRATE</code></td><td>Vibration pattern for lead alerts</td></tr>
     <tr><td><code>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</code></td><td>Keep alerts timely on devices with aggressive battery management</td></tr>
     <tr><td><code>RECEIVE_BOOT_COMPLETED</code></td><td>Restore the presence service after the device reboots</td></tr>
-    <tr><td><code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code></td><td>Encrypted communication with the dealership's Tatpulse workspace</td></tr>
+    <tr><td><code>ACCESS_FINE_LOCATION</code>, <code>ACCESS_COARSE_LOCATION</code></td><td>Read the device's location once, when the representative taps Use my location on a field form; asked for at that tap, never in the background</td></tr>
+    <tr><td><code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code></td><td>Encrypted communication with the dealership's TATPulse workspace</td></tr>
   </tbody>
 </table>
-<p>The app <strong>does not</strong> request permission for contacts, SMS, location, microphone, camera, calendar, photos, or storage.</p>
+<p>Photos are taken through the system camera app and picked through the system photo and file pickers, so the app holds no camera, photo library or storage permission. The Android app <strong>does not</strong> request permission for contacts, SMS, microphone, calendar or background location.</p>
+
+<h3>iOS</h3>
+<table>
+  <thead>
+    <tr><th>Permission</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Notifications, including Time Sensitive notifications</td><td>Show lead alerts, which expire within minutes; the app never overrides a Focus or the Silent switch</td></tr>
+    <tr><td>Live Activities</td><td>Show a lead offer's countdown on the Lock Screen</td></tr>
+    <tr><td>Camera</td><td>Take a photo for a field form, asked for at the first tap of Take photo</td></tr>
+    <tr><td>Location While Using the App</td><td>Read the location once, at a tap of Use my location on a field form; never in the background</td></tr>
+    <tr><td>Focus status</td><td>Keep the in-app ring quiet while a Focus is on</td></tr>
+  </tbody>
+</table>
+<p>The photo library needs no permission: the system's photo picker hands over only the photos the representative picks. The iOS app <strong>does not</strong> request access to contacts, the microphone, the calendar or background location.</p>
 
 <h2>User rights</h2>
-<p>The Tatpulse Leads app is intended to be installed on devices used by a <strong>dealership's own sales staff</strong>, provisioned by the dealership's administrator; it is not a consumer app. The dealership that paired the device is the data controller; Enetro processes the data on behalf of that dealership.</p>
-<p>If you are a sales representative using a device with Tatpulse Leads installed, please contact your dealership's Tatpulse administrator for any data-subject request (access, correction, deletion).</p>
+<p>The TATPulse Leads app is intended to be installed on devices used by a <strong>dealership's own sales staff</strong>, provisioned by the dealership's administrator; it is not a consumer app. The dealership that paired the device is the data controller; Enetro processes the data on behalf of that dealership.</p>
+<p>If you are a sales representative using a device with TATPulse Leads installed, please contact your dealership's TATPulse administrator for any data-subject request (access, correction, deletion).</p>
 <p>If you are a dealership customer, contact us at <a href="mailto:info@enetro.ai">info@enetro.ai</a> with data-subject requests routed through your administrator account.</p>
 
 <h2>Your rights under India's Digital Personal Data Protection Act, 2023</h2>
-<p>If you are a Data Principal whose personal data is processed by the Tatpulse Leads app, you have the following rights under the DPDP Act, 2023:</p>
+<p>If you are a Data Principal whose personal data is processed by the TATPulse Leads app, you have the following rights under the DPDP Act, 2023:</p>
 <ul>
   <li>Right to access a summary of personal data processed about you and the processing activities undertaken.</li>
   <li>Right to correction, completion, updating, and erasure of your personal data.</li>
   <li>Right to nominate another individual to exercise these rights on your behalf in case of incapacity or death.</li>
   <li>Right to grievance redressal through the contact below.</li>
-  <li>Right to withdraw consent at any time. In this app, withdrawal is effected by revoking the optional Call Log permission in Android settings, unpairing the device, or uninstalling the app (see "Removing the app" below).</li>
+  <li>Right to withdraw consent at any time. In this app, withdrawal is effected by revoking the optional Call Log permission (Android) or the camera or location permission in the system settings, unpairing the device, or uninstalling the app (see "Removing the app" below).</li>
 </ul>
-<p>Because the device is paired by your dealership, the dealership is the Data Fiduciary for the lead and call data collected on that device, and Enetro Private Limited acts as a Data Processor on its behalf. The first point of contact for any rights request is your dealership's Tatpulse administrator.</p>
+<p>Because the device is paired by your dealership, the dealership is the Data Fiduciary for the lead, call and field-form data collected on that device, and Enetro Private Limited acts as a Data Processor on its behalf. The first point of contact for any rights request is your dealership's TATPulse administrator. A customer whose details a representative filed with a field form can make the same request through the dealership.</p>
 
 <h3>Grievance officer</h3>
 <p>If your administrator cannot resolve your concern, or for any privacy question concerning Enetro's processing of this data, contact:</p>
@@ -193,10 +233,11 @@
 <p>We will acknowledge your request within 7 days and respond within 30 days, in line with the DPDP Act.</p>
 
 <h3>Cross-border transfer</h3>
-<p>Lead and call-report data is processed and stored on servers located in India. The following limited metadata is processed by Google LLC outside India, under Google's privacy policy at <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>:</p>
+<p>Lead, call-report and field-form data, its photos and files included, is processed and stored on servers located in India. The following limited metadata is processed by Google LLC outside India, under Google's privacy policy at <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>:</p>
 <ul>
   <li>FCM registration tokens (used to deliver lead alerts to the device).</li>
-  <li>Anonymised crash reports (Firebase Crashlytics).</li>
+  <li>Anonymised crash reports (Firebase Crashlytics, Android only).</li>
+  <li>On iOS, push tokens processed by Apple Inc. to deliver alerts through APNs.</li>
 </ul>
 <p>These transfers are made only for the purposes described in this policy and only to jurisdictions India has not restricted under the DPDP Act.</p>
 
@@ -213,15 +254,16 @@
   <li>All traffic between the app and our servers uses HTTPS (TLS 1.2+).</li>
   <li>The app validates server certificates and rejects connections to servers presenting invalid certificates.</li>
   <li>API keys distributed to the app are scoped to a single device and workspace, and are rotated on revocation events.</li>
-  <li>Credentials on the device are stored in encrypted storage.</li>
-  <li>Crashlytics crash reports are sent over HTTPS to Firebase.</li>
+  <li>Credentials on the device are stored in encrypted storage (the Android Keystore, the iOS Keychain).</li>
+  <li>Photos and files filed with a form are stored encrypted at rest.</li>
+  <li>Crashlytics crash reports (Android) are sent over HTTPS to Firebase.</li>
 </ul>
 
 <h2>Children</h2>
 <p>The app is not intended for or directed to children under 18. We do not knowingly collect data from children.</p>
 
 <h2>Changes to this policy</h2>
-<p>We will post any changes to this policy at this URL. Material changes will be notified to administrators via the Tatpulse web console.</p>
+<p>We will post any changes to this policy at this URL. Material changes will be notified to administrators via the TATPulse web console.</p>
 
 <h2>Contact</h2>
 <p>
