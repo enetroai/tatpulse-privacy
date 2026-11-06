@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy - Tatpulse Forwarder</title>
+<title>Privacy Policy - TATPulse Forwarder for Android and iOS</title>
 <style>
   :root {
     --fg: #0f172a;
@@ -56,18 +56,19 @@
 <main>
 
 <h1>Privacy Policy</h1>
-<p class="meta"><strong>Tatpulse Forwarder Android Application</strong> &middot; Last updated: 28 April 2026</p>
-<p class="meta">Enetro's Android app policies: <strong>Tatpulse Forwarder</strong> (this page) &middot; <a href="leads.html">Tatpulse Leads</a></p>
+<p class="meta"><strong>TATPulse Forwarder for Android and iOS</strong> &middot; Last updated: 6 November 2026</p>
+<p class="meta">Enetro's app policies: <strong>TATPulse Forwarder</strong> (this page) &middot; <a href="leads.html">TATPulse Leads</a></p>
 
 <h2>Who we are</h2>
-<p>Enetro Private Limited ("Enetro", "we", "us") is the developer of the Tatpulse Forwarder Android application ("the app"). The app is a B2B tool that routes one-time passcodes (OTPs) from operational mobile phones to authorised back-office workflows, on behalf of the organisation that has installed and paired it.</p>
+<p>Enetro Private Limited ("Enetro", "we", "us") is the developer of the TATPulse Forwarder application for Android and iOS ("the app"). The app is a B2B tool that routes one-time passcodes (OTPs) from operational mobile phones to authorised back-office workflows, on behalf of the organisation that has installed and paired it.</p>
 <p>For questions about this policy, contact <a href="mailto:info@enetro.ai">info@enetro.ai</a>.</p>
 
 <h2>Scope of this policy</h2>
-<p>This policy describes the data handling of the <strong>Tatpulse Forwarder Android application only</strong>. It is separate from, and supplements, Enetro's general privacy policy for the corporate website and web platform at <a href="https://www.enetro.ai/privacy-policy">https://www.enetro.ai/privacy-policy</a>.</p>
+<p>This policy describes the data handling of the <strong>TATPulse Forwarder application, on Android and on iOS</strong>. Where the two differ, the difference is stated. It is separate from, and supplements, Enetro's general privacy policy for the corporate website and web platform at <a href="https://www.enetro.ai/privacy-policy">https://www.enetro.ai/privacy-policy</a>.</p>
 
 <h2>What the app does</h2>
-<p>When a Tatpulse administrator pairs an Android device with the app, the device begins watching for incoming SMS messages whose sender ID and content match patterns the administrator has configured in the workflow. Matching messages, identified as one-time passcodes (OTPs), are forwarded to Enetro's servers and routed onward to the administrator-configured destination. SMS messages that do not match a configured pattern are ignored entirely and never leave the device.</p>
+<p><strong>On Android:</strong> when a TATPulse administrator pairs an Android device with the app, the device begins watching for incoming SMS messages whose sender ID and content match patterns the administrator has configured in the workflow. Matching messages, identified as one-time passcodes (OTPs), are forwarded to Enetro's servers and routed onward to the administrator-configured destination. SMS messages that do not match a configured pattern are ignored entirely and never leave the device.</p>
+<p><strong>On iOS:</strong> no iOS app can read SMS. After pairing, the person setting up the phone creates a Shortcuts automation by hand (a Message trigger with a text filter, set to Run Immediately) that hands the text of each incoming message it matches to the app's Forward Message action. The automation sees every message in the Messages app that its filter matches, whether it arrived as SMS, RCS or iMessage, and the filter the app's setup steps use (a single space) matches nearly every message. iOS gives the app no sender, so rules match the message text alone. The app matches the text on the phone; text that matches no rule is neither sent nor stored, and for a match only the extracted code leaves the phone, never the message. Each message the automation hands over also makes the app contact the server for each paired workspace (a status heartbeat and a rules check), even when no rule matches; neither request carries the message.</p>
 
 <h2>Data we collect</h2>
 
@@ -78,40 +79,46 @@
   </thead>
   <tbody>
     <tr><td>Matched OTP code</td><td>Routing to the administrator's destination</td><td>When an SMS matches a workflow rule</td></tr>
-    <tr><td>Sender ID</td><td>Routing and audit</td><td>When an SMS matches a workflow rule</td></tr>
-    <tr><td>Message timestamp</td><td>Audit</td><td>When an SMS matches a workflow rule</td></tr>
-    <tr><td>FCM registration token</td><td>Receive push notifications from the server</td><td>At app startup and when the token rotates</td></tr>
-    <tr><td>Device identifier (instance UUID)</td><td>Identify the device to its workflow</td><td>At pairing</td></tr>
+    <tr><td>Sender ID. <strong>Android only</strong>; the iOS app never has the sender and sends none</td><td>Routing and audit</td><td>When an SMS matches a workflow rule</td></tr>
+    <tr><td>Message timestamp (on iOS, the time the automation handed the message to the app)</td><td>Audit</td><td>When an SMS matches a workflow rule</td></tr>
+    <tr><td>FCM registration token. <strong>Android only</strong>; the iOS app uses no push service and has no push token</td><td>Receive push notifications from the server</td><td>At app startup and when the token rotates</td></tr>
+    <tr><td>Device identifier (instance UUID). On iOS it is kept in the iOS Keychain on this device only, never in a backup, and kept by iOS when the app is deleted, so a reinstall pairs onto the same device record</td><td>Identify the device to its workflow</td><td>At pairing</td></tr>
     <tr><td>App version, Android OS version, device model</td><td>Diagnostics</td><td>At app startup, periodically, and on crash</td></tr>
-    <tr><td>Crash reports (anonymised)</td><td>Diagnose app errors</td><td>When the app crashes</td></tr>
+    <tr><td>On iOS: the app version and build, the iOS version and the hardware model identifier (for example "iPhone18,1")</td><td>Diagnostics</td><td>The model and OS version at pairing; the version at pairing and with every status heartbeat; nothing on a crash</td></tr>
+    <tr><td>Crash reports (anonymised). <strong>Android only</strong>; the iOS app sends no crash reports and contains no third-party code</td><td>Diagnose app errors</td><td>When the app crashes</td></tr>
+    <tr><td>On iOS: status heartbeat. Whether notifications are allowed (read, never asked for), whether Background App Refresh is available, whether the Shortcuts automation has run at least once, each workspace's pause state, the rules version the phone holds, and when that was read (Android sends equivalents)</td><td>Show the device's state to the administrator</td><td>At pairing, each time the app opens, at iOS background refresh, with each message the automation hands over, and when the pause is switched</td></tr>
+    <tr><td>On iOS: pause and resume events. Which one, with the app version and the OS version (Android sends equivalents)</td><td>Audit</td><td>When the person pauses or resumes a workspace</td></tr>
+    <tr><td>On iOS: delivery failure reports. The failure type, time, rule id, workflow name, the reason, and an event id; never the code or the message (Android sends equivalents)</td><td>Diagnose failed deliveries</td><td>When a delivery fails</td></tr>
   </tbody>
 </table>
 
 <h3>Not collected</h3>
 <ul>
-  <li>SMS messages that do not match a configured rule</li>
+  <li>Messages (SMS, RCS or iMessage) that match no configured rule; on iOS the message text and its sender are never sent, matched or not</li>
   <li>Phone contacts</li>
   <li>Location</li>
   <li>Photos, files, or other on-device content</li>
   <li>Microphone or camera input</li>
   <li>Browsing history</li>
+  <li>On iOS, the phone's own number and the Apple Account</li>
 </ul>
 
 <h2>How we use the data</h2>
 <ul>
   <li><strong>Forwarding OTPs</strong> to the destination configured by the administrator (typically a webhook into the customer's own systems).</li>
   <li><strong>De-duplicating OTPs</strong> so the same code is not delivered twice when multiple SIMs receive the same SMS.</li>
-  <li><strong>Showing diagnostics</strong> to the device operator (recent deliveries, retry counts) and to administrators on the Tatpulse web console.</li>
-  <li><strong>Diagnosing app problems</strong> through anonymised crash reports.</li>
+  <li><strong>Showing diagnostics</strong> to the device operator (recent deliveries, retry counts) and to administrators on the TATPulse web console.</li>
+  <li><strong>Diagnosing app problems</strong> through anonymised crash reports (Android only).</li>
 </ul>
 <p>We do <strong>not</strong> use OTP or SMS data for advertising, profiling, training machine-learning models, or any purpose unrelated to the workflow you have authorised. We do not sell personal data.</p>
 
-<h2>Push notifications and crash reporting</h2>
+<h2>Push notifications and crash reporting (Android only)</h2>
+<p>The iOS app uses no push service and no crash reporting, so workflow changes, renames and revocations reach an iPhone the next time it contacts the server (with the next message, when the app opens, or at background refresh).</p>
 
-<h3>Google Firebase Cloud Messaging (FCM)</h3>
+<h3>Google Firebase Cloud Messaging (FCM) (Android only)</h3>
 <p>The app uses FCM to receive wake-up signals from our servers (for example when workflow rules change, when the device is asked to re-authenticate, or when an instance is revoked). FCM processes the device's registration token. Google's handling of FCM data is governed by Google's privacy policy at <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>.</p>
 
-<h3>Google Firebase Crashlytics</h3>
+<h3>Google Firebase Crashlytics (Android only)</h3>
 <p>The app uses Crashlytics to collect anonymised crash reports if it misbehaves. We do not include OTP values, SMS bodies, or sender identifiers in crash reports.</p>
 
 <h2>Retention</h2>
@@ -122,7 +129,8 @@
   <tbody>
     <tr><td>Matched OTPs (server-side)</td><td>30 days</td></tr>
     <tr><td>Delivery diagnostic events</td><td>90 days</td></tr>
-    <tr><td>Crash reports</td><td>90 days (Firebase default)</td></tr>
+    <tr><td>Crash reports (Android only)</td><td>90 days (Firebase default)</td></tr>
+    <tr><td>On-device journal: each workspace's event history on the phone (outcome, time, workflow and the captured code)</td><td>The newest 500 events and at most 30 days; failure reports are kept until sent; all deleted with the workspace on unpair; excluded from backups on iOS</td></tr>
     <tr><td>Device pairing and metadata</td><td>Until the device is unpaired</td></tr>
   </tbody>
 </table>
@@ -132,12 +140,14 @@
 <p>We share data only with:</p>
 <ul>
   <li>The <strong>back-office system the administrator has configured</strong> as the workflow destination (this is the entire point of the app).</li>
-  <li><strong>Google Firebase</strong> for FCM push notifications and Crashlytics crash reporting (see <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>).</li>
+  <li><strong>Google Firebase</strong>, on Android only, for FCM push notifications and Crashlytics crash reporting (see <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>).</li>
   <li><strong>Cloud infrastructure providers</strong> (Amazon Web Services, hosted in India) that operate our servers.</li>
 </ul>
+<p>The iOS app sends data to no one but Enetro's servers.</p>
 <p>We do not sell data to data brokers, share OTPs with advertisers, or disclose data to anyone other than the parties above except where required by law.</p>
 
-<h2>Android permissions</h2>
+<h2>Permissions</h2>
+<h3>Android</h3>
 <table>
   <thead>
     <tr><th>Permission</th><th>Why</th></tr>
@@ -150,23 +160,35 @@
     <tr><td><code>RECEIVE_BOOT_COMPLETED</code></td><td>Restart forwarder after device reboot</td></tr>
   </tbody>
 </table>
-<p>The app <strong>does not</strong> request permission for contacts, location, microphone, camera, calendar, photos, or storage.</p>
+<p>The Android app <strong>does not</strong> request permission for contacts, location, microphone, camera, calendar, photos, or storage.</p>
+
+<h3>iOS</h3>
+<p>The iOS app asks for no permission: no notifications, contacts, location, camera, microphone, photos or calendar. What the person sets up instead is:</p>
+<table>
+  <thead>
+    <tr><th>Setup</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>The Shortcuts automation, made by hand in the Shortcuts app</td><td>Hands the text of matching messages to the app; deleting it stops the app receiving messages</td></tr>
+    <tr><td>Background App Refresh, an iOS setting the app reads</td><td>Used to sync rules and send queued reports</td></tr>
+  </tbody>
+</table>
 
 <h2>User rights</h2>
-<p>The Tatpulse Forwarder app is intended to be installed by an <strong>organisation on its own devices</strong>, not by individual end users. The organisation that paired the device is the data controller; Enetro processes the OTP data on behalf of that organisation.</p>
-<p>If you are an end user of a device that has Tatpulse Forwarder installed, please contact your organisation's Tatpulse administrator for any data-subject request (access, correction, deletion).</p>
+<p>The TATPulse Forwarder app is intended to be installed by an <strong>organisation on its own devices</strong>, not by individual end users. The organisation that paired the device is the data controller; Enetro processes the OTP data on behalf of that organisation.</p>
+<p>If you are an end user of a device that has TATPulse Forwarder installed, please contact your organisation's TATPulse administrator for any data-subject request (access, correction, deletion).</p>
 <p>If you are an organisation customer, contact us at <a href="mailto:info@enetro.ai">info@enetro.ai</a> with data-subject requests routed through your administrator account.</p>
 
 <h2>Your rights under India's Digital Personal Data Protection Act, 2023</h2>
-<p>If you are a Data Principal whose personal data is processed by the Tatpulse Forwarder app, you have the following rights under the DPDP Act, 2023:</p>
+<p>If you are a Data Principal whose personal data is processed by the TATPulse Forwarder app, you have the following rights under the DPDP Act, 2023:</p>
 <ul>
   <li>Right to access a summary of personal data processed about you and the processing activities undertaken.</li>
   <li>Right to correction, completion, updating, and erasure of your personal data.</li>
   <li>Right to nominate another individual to exercise these rights on your behalf in case of incapacity or death.</li>
   <li>Right to grievance redressal through the contact below.</li>
-  <li>Right to withdraw consent at any time. In this app, withdrawal is effected by tapping <strong>Unpair</strong> on each instance, or uninstalling the app (see "Removing the app" below).</li>
+  <li>Right to withdraw consent at any time. In this app, withdrawal is effected by tapping <strong>Unpair</strong> on each instance, or uninstalling the app. On iOS, withdrawal is effected by Unpair (swipe a workspace on Home, or Unpair on its screen), deleting the Shortcuts automation, or deleting the app (see "Removing the app" below).</li>
 </ul>
-<p>Because the device is paired by your organisation, the organisation is the Data Fiduciary for the OTPs collected on that device, and Enetro Private Limited acts as a Data Processor on its behalf. The first point of contact for any rights request is your organisation's Tatpulse administrator.</p>
+<p>Because the device is paired by your organisation, the organisation is the Data Fiduciary for the OTPs collected on that device, and Enetro Private Limited acts as a Data Processor on its behalf. The first point of contact for any rights request is your organisation's TATPulse administrator.</p>
 
 <h3>Grievance officer</h3>
 <p>If your administrator cannot resolve your concern, or for any privacy question concerning Enetro's processing of OTP data, contact:</p>
@@ -181,19 +203,21 @@
 <p>We will acknowledge your request within 7 days and respond within 30 days, in line with the DPDP Act.</p>
 
 <h3>Cross-border transfer</h3>
-<p>OTP data is processed and stored on servers located in India. The following limited metadata is processed by Google LLC outside India, under Google's privacy policy at <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>:</p>
+<p>OTP data is processed and stored on servers located in India. On Android, the following limited metadata is processed by Google LLC outside India, under Google's privacy policy at <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>:</p>
 <ul>
   <li>FCM registration tokens (used to deliver push notifications to the device).</li>
   <li>Anonymised crash reports (Firebase Crashlytics).</li>
 </ul>
-<p>These transfers are made only for the purposes described in this policy and only to jurisdictions India has not restricted under the DPDP Act.</p>
+<p>On iOS, the app's data goes only to Enetro's servers in India. These transfers are made only for the purposes described in this policy and only to jurisdictions India has not restricted under the DPDP Act.</p>
 
 <h2>Removing the app</h2>
 <p>To stop further OTP capture immediately:</p>
 <ol>
   <li>Open the app and tap <strong>Unpair</strong> on each instance, or</li>
   <li>Uninstall the app from the device.</li>
+  <li>On iOS, also delete the Message automation in Shortcuts, under Automation.</li>
 </ol>
+<p>On iOS, deleting the app removes its pairings and journal, while iOS keeps the app's Keychain items (the install identifier, and the credential of any workspace not unpaired first), which work only with a new pairing. Unpair first to revoke the credential on the server.</p>
 <p>Server-side OTP data tied to the unpaired device is purged within 30 days of unpair or uninstall.</p>
 
 <h2>Security</h2>
@@ -201,14 +225,15 @@
   <li>All traffic between the app and our servers uses HTTPS (TLS 1.2+).</li>
   <li>The app validates server certificates and rejects connections to servers presenting invalid certificates.</li>
   <li>API keys distributed to the app are scoped to a single device and workflow, and are rotated on revocation events.</li>
-  <li>Crashlytics crash reports are sent over HTTPS to Firebase.</li>
+  <li>Crashlytics crash reports (Android only) are sent over HTTPS to Firebase.</li>
+  <li>On iOS, credentials are Keychain items bound to this device and never in a backup, and the app's stored data is excluded from iCloud and computer backups.</li>
 </ul>
 
 <h2>Children</h2>
 <p>The app is not intended for or directed to children under 18. We do not knowingly collect data from children.</p>
 
 <h2>Changes to this policy</h2>
-<p>We will post any changes to this policy at this URL. Material changes will be notified to administrators via the Tatpulse web console.</p>
+<p>We will post any changes to this policy at this URL. Material changes will be notified to administrators via the TATPulse web console.</p>
 
 <h2>Contact</h2>
 <p>
